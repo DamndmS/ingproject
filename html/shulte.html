@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таблица Шульте</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', path='styles/shulte.css')}}">
+</head>
+<body>
+    <div class="grid">
+        <a href="/index"><button class="GA">Главная</button></a>
+        <a href="/shulte"><button class="povtor">Повторить</button></a>
+
+        <div class="current-number-container">
+            Выберите число: <span id="current_number">1</span>
+        </div>
+
+        <div class="shulte_table"></div>
+        <div id="display">00:00:00</div>
+        <div id="completed" class="completed" style="display: none;">Молодец!</div>
+    </div>
+
+    <script src="{{url_for('static', path='scripts/main.js')}}"></script>
+</body>
+</html>

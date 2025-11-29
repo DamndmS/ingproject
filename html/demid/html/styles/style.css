@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
+body {
+    font-family: "Sofia Sans", sans-serif;
+}
+
+h1{
+    font-size: 24px;
+    color: black;
+}
+h2{
+    font-size: 25px;
+    color: black}
+
+#second_paragraph{
+margin: 50px;
+padding: 30px;
+}
+
+.wrapp{
+display: grid;
+grid-autorows: 1fr 1fr 1fr 1fr}
+
+#GA{
+color: black;
+}
+

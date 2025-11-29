@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Тест на внимательность</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for ('static', path='styles/style3.css')}}">
+</head>
+<body>
+<a href="/index"><button class="GA">Главная</button></a>
+    <h3>Сколько было коротких и длинных сигналов во втором аудио? (Сначала напишите количество коротких сигналов, затем длинных. Пишите через "И".)</h3>
+    <form id="quiz1">
+        <p>Введите ответ:</p>
+        <input type="text" id="answer1" name="answer1" size="10">
+        <br><br>
+        <input type="submit" value="Проверить">
+    </form>
+
+    <h3>Сколько было коротких и длинных сигналов в третьем аудио? (Сначала напишите количество коротких сигналов, затем длинных. Пишите через "И".)</h3>
+    <form id="quiz2">
+        <p>Введите ответ:</p>
+        <input type="text" id="answer2" name="answer2" size="10">
+        <br><br>
+        <input type="submit" value="Проверить">
+    </form>
+
+    <script>
+        // Вопрос 1
+        document.getElementById('quiz1').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const answer = document.getElementById('answer1').value.trim();
+            if (answer.toLowerCase() === '19 и 29') {
+                alert('Верно');
+            } else {
+                alert('Неверно');
+            }
+            document.getElementById('answer1').value = '';
+        });
+
+        // Вопрос 2
+        document.getElementById('quiz2').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const answer = document.getElementById('answer2').value.trim();
+            if (answer.toLowerCase() === '18 и 31') {
+                alert('Верно');
+            } else {
+                alert('Неверно');
+            }
+            document.getElementById('answer2').value = '';
+        });
+    </script>
+</body>
+</html>

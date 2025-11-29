@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Авторизация</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: #f2f3f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            width: 340px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow:
+                0 4px 12px rgba(0,0,0,0.08),
+                0 2px 4px rgba(0,0,0,0.05);
+            padding: 30px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 500;
+            color: #444;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 6px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #ccd0d5;
+            background: #fafafa;
+            outline: none;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: #7a9cff;
+            box-shadow: 0 0 0 3px rgba(122,156,255,0.25);
+            background: #fff;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #6c7ae0;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        button:hover {
+            background: #5a69c9;
+        }
+
+        .error {
+            color: #d9534f;
+            font-size: 14px;
+            margin-top: 8px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+        <a href="/index"><button>Главная</button></a>
+        <h2>Авторизация</h2>
+        <form method="post" action="sendForm">
+        <div class="input-group">
+            <label for="second_name">Фамилия</label>
+            <input class="username" type="text" id="second_name" placeholder="Введите логин">
+        </div>
+        <div class="input-group">
+            <label for="first_name">Имя</label>
+            <input class="username" type="text" id="first_name" placeholder="Введите логин">
+        </div>
+
+        <div class="input-group">
+            <label for="father_name">Отчество</label>
+            <input class="username" type="text" id="father_name" placeholder="Введите логин">
+        </div>
+
+        <div class="input-group">
+            <label for="grup">Группа</label>
+            <input id="password" type="text" id="grup" placeholder="Введите пароль">
+        </div>
+
+        <button onclick="login()">Войти</button>
+        </form>
+        <div id="error" class="error">Неверный логин или пароль</div>
+    </div>
+
+
+    <script>
+        function login() {
+            const user = document.getElementById("username").value.trim();
+            const pass = document.getElementById("password").value.trim();
+            const errorBox = document.getElementById("error");
+
+            if (user === "admin" && pass === "1234") {
+                alert("Успешный вход!");
+                errorBox.style.display = "none";
+            } else {
+                errorBox.style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>

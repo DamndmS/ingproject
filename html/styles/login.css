@@ -1,0 +1,54 @@
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 500px 1fr;
+    grid-template-rows: 100px 500px 100px 1fr;
+}
+
+.forma {
+	grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start:2;
+    grid-column-end:2;
+	text-align: center;
+	margin-top: 10%;
+}
+
+#second_name {
+	margin-bottom: 30px;
+}
+
+#first_name {
+	margin-bottom: 30px;
+}
+
+#father_name{
+	margin-bottom: 100px;
+}
+
+
+
+
+.GA {
+	height: 40px;
+	width: 130px;
+	border: 2px solid black;
+	border-radius: 40%;
+	background-color: white;
+	font-size: 20px;
+	margin-left: 6%;
+	margin-top: 1%;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.GA:hover {
+	
+	background-color:#ff8c00;
+	border: 4px solid black;
+	
+}
+
+.GA:active {
+	background-color: black;
+}

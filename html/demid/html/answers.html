@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Результаты опроса</title>
+    </head>
+    <body>
+        <h1>Результаты опроса</h1>
+        <table>
+            <tr>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Група</th>
+            </tr>
+            {% for item in data_items %}
+                <tr>
+                    <td>{{ item.second_name }}</td>
+                    <td>{{ item.first_name }}</td>
+                    <td>{{ item.father_name }}</td>
+                    <td>{{ item.group }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    </body>
+</html>

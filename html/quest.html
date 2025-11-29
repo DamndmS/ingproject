@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{url_for ('static', path='styles/style3.css')}}">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Тестирование</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  .question {
+    margin-bottom: 15px;
+  }
+  .answers button {
+    display: block;
+    margin: 5px 0;
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10%;
+    border-color: lightyellow;
+  }
+  .correct {
+    background-color: #4caf50; /* зелёный */
+    color: white;
+  }
+  .incorrect {
+    background-color: #f44336; /* красный */
+    color: white;
+  }
+  #result {
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  #retryBtn {
+    display: none;
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<a href="/index"><button class="GA">Главная</button></a>
+<h2>Тестирование по содержанию аудиокниги.</h2>
+<div id="quiz"></div>
+<div id="result"></div>
+<button id="retryBtn">Попробовать ещё раз</button>
+
+<script>
+  const questions = [
+    {
+      text: "Как звали брата генерала, который на самом деле был хозяином собаки?",
+      answers: ["Алексей Владимирович", "Владимир Иванович", "Сергей Петрович", "Пётр Иванович"],
+      correct: 1
+    },
+    {
+      text: "Какую вещь несёт за надзирателем городовой Елдырин?",
+      answers: ["Сумку с деньгами", "Книгу законов", "Собак на цепи", "Решето с крыжовником"],
+      correct: 3
+    },
+    {
+      text: "Что Хрюкин демонстрирует толпе в качестве доказательства своей правоты?",
+      answers: ["Порванную одежду", "Следы укусов", "Окровавленный палец", "Свидетелей"],
+      correct: 1
+    },
+    {
+      text: "Кто укусил за палец золотых дел мастера Хрюкина?'?",
+      answers: ["Кошка", "Лошадь", "Собака", "Ребёнок"],
+      correct: 2
+    },
+    {
+      text: "Какую деталь своей внешности Очумелов то снимал, то вновь накидывал на себя?",
+      answers: ["Очки", "Фуражку", "Перчатки", "Шинель"],
+      correct: 3
+    }
+  ];
+
+  let errorsCount = 0;
+  let answeredCount = 0;
+
+  const quizDiv = document.getElementById('quiz');
+  const resultDiv = document.getElementById('result');
+  const retryBtn = document.getElementById('retryBtn');
+
+  function renderQuiz() {
+    quizDiv.innerHTML = '';
+    errorsCount = 0;
+    answeredCount = 0;
+    resultDiv.textContent = '';
+    retryBtn.style.display = 'none';
+
+    questions.forEach((q, idx) => {
+      const qDiv = document.createElement('div');
+      qDiv.className = 'question';
+
+      const qText = document.createElement('p');
+      qText.textContent = `${idx + 1}. ${q.text}`;
+      qDiv.appendChild(qText);
+
+      const answersDiv = document.createElement('div');
+      answersDiv.className = 'answers';
+
+      q.answers.forEach((answer, aIdx) => {
+        const btn = document.createElement('button');
+        btn.textContent = answer;
+        btn.dataset.questionIndex = idx;
+        btn.dataset.answerIndex = aIdx;
+        btn.addEventListener('click', onAnswerClick);
+        answersDiv.appendChild(btn);
+      });
+
+      qDiv.appendChild(answersDiv);
+      quizDiv.appendChild(qDiv);
+    });
+  }
+
+  function onAnswerClick(e) {
+    const btn = e.target;
+    const qIdx = +btn.dataset.questionIndex;
+    const aIdx = +btn.dataset.answerIndex;
+    const question = questions[qIdx];
+    const parent = btn.parentNode;
+
+    // Если вопрос уже отвечен, игнорируем клики
+    if (parent.querySelector('.correct, .incorrect')) return;
+
+    // Проверяем правильность ответа
+    if (aIdx === question.correct) {
+      btn.classList.add('correct');
+    } else {
+      btn.classList.add('incorrect');
+      errorsCount++;
+      // Подсветить правильный ответ
+      const correctBtn = [...parent.children].find(
+        b => +b.dataset.answerIndex === question.correct
+      );
+      if (correctBtn) correctBtn.classList.add('correct');
+    }
+
+    // Заблокировать все кнопки для этого вопроса
+    Array.from(parent.children).forEach(b => b.disabled = true);
+
+    answeredCount++;
+    if (answeredCount === questions.length) {
+      showResults();
+    }
+  }
+
+  function showResults() {
+    resultDiv.textContent =
+      `Тест завершён. Правильных ответов: ${questions.length - errorsCount} из ${questions.length}.`;
+
+    if (errorsCount >= 2) {
+      retryBtn.style.display = 'inline-block';
+    }
+  }
+
+  retryBtn.addEventListener('click', () => {
+    renderQuiz();
+  });
+
+  renderQuiz();
+</script>
+
+</body>
+</html>
